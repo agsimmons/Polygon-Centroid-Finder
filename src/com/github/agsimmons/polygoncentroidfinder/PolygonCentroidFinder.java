@@ -17,12 +17,13 @@ public class PolygonCentroidFinder extends Application {
 
     static final int CANVAS_SIZE_X = 500;
     static final int CANVAS_SIZE_Y = 500;
-    static final double VERTEX_SCALAR = 20;
     static final double VERTEX_SIZE = 10;
     static final double LINE_WIDTH = 3;
     static final Color COLOR_VERTEX = Color.BLACK;
     static final Color COLOR_EDGE = Color.BLUE;
     static final Color COLOR_CENTROID = Color.GREEN;
+
+    static double VERTEX_SCALAR = 20;
 
     static ArrayList<Vertex> vertices;
     static ArrayList<Edge> edges;
@@ -40,6 +41,9 @@ public class PolygonCentroidFinder extends Application {
 
         System.out.print("Input: ");
         String input = scanner.nextLine();
+        
+        System.out.print("Vertex Scalar (20 is recommended): ");
+        VERTEX_SCALAR = scanner.nextInt();
 
         String[] vertexStrings = input.split(" ");
         // debug("vertexString: " + Arrays.toString(vertexStrings));
