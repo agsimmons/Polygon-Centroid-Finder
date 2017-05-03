@@ -140,7 +140,7 @@ public class PolygonCentroidFinder extends Application {
         gc.setFill(COLOR_CENTROID);
         gc.fillOval(drawX - (VERTEX_SIZE / 2), drawY - (VERTEX_SIZE / 2), VERTEX_SIZE, VERTEX_SIZE);
         
-        debug(new StringBuilder("Centroid: ").append('{')
+        System.out.println(new StringBuilder("Centroid: ").append('{')
                                              .append(DF.format(x))
                                              .append(',')
                                              .append(DF.format(y))
