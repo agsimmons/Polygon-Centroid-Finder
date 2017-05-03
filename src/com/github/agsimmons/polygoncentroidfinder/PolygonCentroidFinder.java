@@ -27,10 +27,7 @@ public class PolygonCentroidFinder extends Application {
     static ArrayList<Vertex> vertices;
     static ArrayList<Edge> edges;
 
-    public static void main(String[] args) {
-        vertices = getVertices();
-        edges = getEdges(vertices);
-        
+    public static void main(String[] args) { 
         launch(args);
     }
 
@@ -82,8 +79,10 @@ public class PolygonCentroidFinder extends Application {
 
     @Override
     public void start(Stage stage) {
+        vertices = getVertices();
+        edges = getEdges(vertices);
+        
         // Initialize Stage
-
         Group root = new Group();
         Canvas canvas = new Canvas(CANVAS_SIZE_X, CANVAS_SIZE_Y);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -120,10 +119,9 @@ public class PolygonCentroidFinder extends Application {
     }
 
     private void drawCentroid(ArrayList<Vertex> v, double area, GraphicsContext gc) {
-        int x = 0;
-        int y = 0;
+        double x = 0;
+        double y = 0;
 
-        // TODO: Currently returns incorrect value
         for (int i = 0; i < v.size() - 1; i++) {
             x += ((v.get(i).x / VERTEX_SCALAR) + (v.get(i + 1).x / VERTEX_SCALAR)) * ((v.get(i).x / VERTEX_SCALAR) * (v.get(i + 1).y / VERTEX_SCALAR) - (v.get(i + 1).x / VERTEX_SCALAR) * (v.get(i).y / VERTEX_SCALAR));
             y += ((v.get(i).y / VERTEX_SCALAR) + (v.get(i + 1).y / VERTEX_SCALAR)) * ((v.get(i).x / VERTEX_SCALAR) * (v.get(i + 1).y / VERTEX_SCALAR) - (v.get(i + 1).x / VERTEX_SCALAR) * (v.get(i).y / VERTEX_SCALAR));
@@ -133,16 +131,19 @@ public class PolygonCentroidFinder extends Application {
         x += ((v.get(v.size() - 1).x / VERTEX_SCALAR) + (v.get(0).x / VERTEX_SCALAR)) * ((v.get(v.size() - 1).x / VERTEX_SCALAR) * (v.get(0).y / VERTEX_SCALAR) - (v.get(0).x / VERTEX_SCALAR) * (v.get(v.size() - 1).y / VERTEX_SCALAR));
         y += ((v.get(v.size() - 1).y / VERTEX_SCALAR) + (v.get(0).y / VERTEX_SCALAR)) * ((v.get(v.size() - 1).x / VERTEX_SCALAR) * (v.get(0).y / VERTEX_SCALAR) - (v.get(0).x / VERTEX_SCALAR) * (v.get(v.size() - 1).y / VERTEX_SCALAR));
         
-        x *= 1 / (6 * area);
-        y *= 1 / (6 * area);
+        double drawX = x * (1 / (6.0 * area / VERTEX_SCALAR));
+        double drawY = y * (1 / (6.0 * area / VERTEX_SCALAR));
+        
+        x *= 1 / (6.0 * area);
+        y *= 1 / (6.0 * area);
 
         gc.setFill(COLOR_CENTROID);
-        gc.fillOval(x - (VERTEX_SIZE / 2), y - (VERTEX_SIZE / 2), VERTEX_SIZE, VERTEX_SIZE);
+        gc.fillOval(drawX - (VERTEX_SIZE / 2), drawY - (VERTEX_SIZE / 2), VERTEX_SIZE, VERTEX_SIZE);
         
         debug(new StringBuilder("Centroid: ").append('{')
-                                             .append(x / VERTEX_SCALAR)
+                                             .append(DF.format(x))
                                              .append(',')
-                                             .append(y / VERTEX_SCALAR)
+                                             .append(DF.format(y))
                                              .append('}')
                                              .toString());
     }
