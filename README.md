@@ -1,5 +1,5 @@
 # Polygon-Centroid-Finder
-Given a set of vertices, this program graphically plots the corresponding polygon, and calculates it's area and the coordinates of it's centroid
+Given a set of vertices, this program graphically plots the corresponding polygon, and calculates it's area and the coordinates of it's [centroid](https://en.wikipedia.org/wiki/Centroid)
 
 ## Image
 ![](http://i.imgur.com/pb1B0VA.png)
